@@ -24,6 +24,7 @@ Main LXC running services on the homelab through a combination of Docker images 
 - [Portainer](#portainer)
   - [Grafana](#grafana)
   - [Caddy](#caddy)
+  - [Prometheus](#prometheus)
 - [Samba](#samba)
 
 # Services
@@ -66,6 +67,17 @@ Dashboard for monitoring various metrics and analytics (to be configured)
 - Manage Caddyfile at `/opt/caddy/`
 
 Reverse proxy for redirecting hostnames to IP address + port combinations over HTTPS with self-signed certificates. Used in conjunction with Pi-hole to provide local DNS records for services running on the homelab. Refer to the Pi-hole documentation for more information.
+
+## Prometheus
+
+- Version 3.11.2
+- Deployed as a Docker container
+- YAML file path: `/home/george/prometheus/docker-compose.yml`
+- Active ports:
+  - 9090
+  - 9100
+
+Data source for Grafana monitoring dashboards. Includes a node exporter container.
 
 ## Samba
 
