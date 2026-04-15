@@ -25,6 +25,7 @@ Main LXC running services on the homelab through a combination of Docker images 
   - [Grafana](#grafana)
   - [Caddy](#caddy)
   - [Prometheus](#prometheus)
+  - [Cadvisor](#cadvisor)
 - [Samba](#samba)
 
 # Services
@@ -78,6 +79,14 @@ Reverse proxy for redirecting hostnames to IP address + port combinations over H
   - 9100
 
 Data source for Grafana monitoring dashboards. Includes a node exporter container.
+
+## Cadvisor
+
+- Deployed as a Docker container with [Prometheus](#prometheus) and Redis.
+- Active ports:
+  - 8080
+
+Data source for monitoring deployed Docker containers.
 
 ## Samba
 
