@@ -1,0 +1,42 @@
+portainer.home.arpa {
+        reverse_proxy https://192.168.50.2:9443 {
+                transport http {
+                        tls_insecure_skip_verify
+                }
+                header_up Host {host}
+                header_up Origin https://portainer.home.arpa
+                header_up Referer https://portainer.home.arpa
+                header_up X-Forwarded-Proto https
+                header_up X-Real-IP {remote_host}
+                header_up X-Forwarded-For {remote_host}
+        }
+}
+
+immich.home.arpa {
+        reverse_proxy http://192.168.50.11:2283
+}
+
+pihole.home.arpa {
+        reverse_proxy https://192.168.1.52:443 {
+                transport http {
+                        tls_insecure_skip_verify
+                }
+        }
+}
+
+proxmox.home.arpa {
+        reverse_proxy https://192.168.1.64:8006 {
+                transport http {
+                        tls_insecure_skip_verify
+                }
+        }
+}
+
+grafana.home.arpa {
+        reverse_proxy http://192.168.50.2:3000
+}
+
+https://nextcloud.home.arpa:443 {
+        reverse_proxy localhost:11000
+}
+
