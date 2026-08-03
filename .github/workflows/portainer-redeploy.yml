@@ -6,7 +6,7 @@ on:
 
 jobs:
   changes:
-      runs-on: ubuntu-latest
+      runs-on: self-hosted
       outputs:
         caddy: ${{ steps.filter.outputs.caddy }}
       steps:
