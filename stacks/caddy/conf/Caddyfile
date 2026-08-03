@@ -15,3 +15,12 @@ proxmox.home.arpa {
 		}
 	}
 }
+
+pihole.home.arpa {
+	tls internal
+	reverse_proxy 192.168.1.52 {
+		transport http {
+			tls_insecure_skip_verify
+		}
+	}
+}
