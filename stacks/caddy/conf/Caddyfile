@@ -6,3 +6,12 @@ portainer.home.arpa {
 		}
 	}
 }
+
+proxmox.home.arpa {
+	tls internal
+	reverse_proxy 192.168.1.1:8006 {
+		transport http {
+			tls_insecure_skip_verify
+		}
+	}
+}
