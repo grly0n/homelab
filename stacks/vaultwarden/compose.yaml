@@ -1,11 +1,9 @@
 services:
   vaultwarden:
-    image: vaultwarden.server:latest
+    image: vaultwarden/server:latest
     container_name: vaultwarden
     restart: always
-    environment:
-      SIGNUPS_ALLOWED: "true"
     volumes:
       - ./vw-data:/data
     ports:
-      - 11001:80
+      - 8080:80
