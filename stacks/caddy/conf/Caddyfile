@@ -24,3 +24,12 @@ pihole.home.arpa {
 		}
 	}
 }
+
+immich.home.arpa {
+	tls internal
+	reverse_proxy 192.168.1.2:2283 {
+		transport http {
+			tls_insecure_skip_verify
+		}
+	}
+}
