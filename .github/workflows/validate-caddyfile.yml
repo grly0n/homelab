@@ -24,7 +24,7 @@ jobs:
           docker run --rm \
           -v ${{ github.workspace }}/stacks/caddy/conf/Caddyfile:/etc/caddy/Caddyfile:ro \
           caddy:latest \
-          caddy validate --config /etc/caddy/Caddyconfig --adapter caddyfile
+          caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile
       
       - name: Build image (sanity check)
         run: |
