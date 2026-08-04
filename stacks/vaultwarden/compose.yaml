@@ -11,11 +11,11 @@ services:
     volumes:
       - ./vw-data:/data
     networks:
-      - caddy_net
+      - caddy_default
 
 volumes:
   vw-data:
 
 networks:
-  caddy_net:
+  caddy_default:
     external: true
