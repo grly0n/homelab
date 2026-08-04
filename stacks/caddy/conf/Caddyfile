@@ -1,6 +1,6 @@
 portainer.home.arpa {
 	tls internal
-	reverse_proxy 192.168.1.50:9443 {
+	reverse_proxy portainer:9443 {
 		transport http {
 			tls_insecure_skip_verify
 		}
