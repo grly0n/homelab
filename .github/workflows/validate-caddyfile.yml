@@ -29,7 +29,7 @@ jobs:
       
       - name: Build image (sanity check)
         run: |
-          docker build -t caddy-validate-test ./caddy
+          docker build -t caddy-validate-test ./stacks/caddy
 
       - name: Smoke test container starts cleanly
         run: |
