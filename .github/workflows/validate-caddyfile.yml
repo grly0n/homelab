@@ -1,0 +1,48 @@
+name: Validate Caddyfile
+
+on:
+  push:
+    paths:
+      - 'stacks/caddy/conf/Caddyfile'
+      - 'stacks/caddy/Dockerfile'
+      - 'stacks/caddy/docker-compose.yml'
+  pull_request:
+    paths:
+      - 'stacks/caddy/conf/Caddyfile'
+      - 'stacks/caddy/Dockerfile'
+      - 'stacks/caddy/docker-compose.yml'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Validate Caddyfile syntax
+        run: |
+          docker run --rm \
+          -v ${{ github.workspace }}/stacks/caddy/conf/Caddyfile:/etc/caddy/Caddyfile:ro \
+          caddy:latest \
+          caddy validate --config /etc/caddy/Caddyconfig --adapter caddyfile
+      
+      - name: Build image (sanity check)
+        run: |
+          docker build -t caddy-validate-test ./caddy
+
+      - name: Smoke test container starts cleanly
+        run: |
+          docker run -d --name caddy-smoke-test caddy-validate-test
+          sleep 3
+          STATUS=$(docker inspect -f '{{.State.Status}}' caddy-smoke-test)
+          if [ "$STATUS" != "running" ]; then
+            echo "Container failed to start or crashed. Logs:"
+            docker logs caddy-smoke-test
+            exit 1
+          fi
+          echo "Container started successfully."
+          docker logs caddy-smoke-test
+
+      - name: Cleanup
+        if: always()
+        run: docker rm -f caddy-smoke-test || true
